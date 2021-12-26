@@ -1,0 +1,24 @@
+#include "opencv2/opencv.hpp"  // 다양한 클래스와 함수가 선언되어 있는 opencv.hpp 헤더파일
+#include <iostream>  // 표준 출력을 위한 iostream 헤더 파일
+
+using namespace cv;  // cv:: 생략 가능
+using namespace std;  // std:: 생략 가능
+
+int main()
+{
+	cout << "Hello OpenCV " << CV_VERSION << endl;  // OpenCV 라이브러리 버전 출력하는 코드
+	// (OpenCV에서 영상 데이터는 Mat 클래스를 이용하여 표현. 영상은 원소가 0부터 255 사이의 정수 값을 가질 수 있는 특별한 형태의 이차원 행렬이므로 Mat 클래스를 이용하여 표현)
+	Mat img;  // Mat 클래스 타입의 변수 img 선언 
+	img = imread("lena.jpg");  // imread() 함수를 사용하여 lenna.bmp 파일을 불러와서 img 변수에 저장.
+
+	if (img.empty()) {  // lenna.bmp 파일을 제대로 불러오지 못했을 경우 예외 처리
+		cerr << "Image load failed!" << endl;  // failed 문자열 출력 후 
+		return -1;  //프로그램 종료
+	}
+
+	namedWindow("image");  // namedWindow() 함수를 이용하여 영상을 화면에 나타내기 위한 새로운 창을 생성하고 창에 "image"라는 이름 부여
+	imshow("image", img);  // imshow() 함수를 이용하여 "image" 창에 img 객체가 갖고있는 영상 출력
+
+	waitKey();  // 키보드 입력을 기다리는 함수
+	return 0;
+}
